@@ -1,43 +1,25 @@
+const { getAllUsers, getUserById, createNewUser } = require('../db/queries');
+
 module.exports = async function (server, opts, next) {
   // Get all people
   server.get('/', async (req, reply) => {
-    const client = await server.pg.connect();
+    const data = await getAllUsers(server);
 
-    const { rows } = await client.query('SELECT * FROM account;');
-
-    client.release();
-
-    return rows;
+    return data;
   });
 
   // Get person by ID
   server.get('/:id', async (req, reply) => {
-    const { id } = req.params;
+    const data = await getUserById(server, req.params.id);
 
-    const client = await server.pg.connect();
-
-    const queryText = `SELECT * FROM account WHERE id = $1;`;
-    const values = [id];
-
-    const { rows } = await client.query(queryText, values);
-    client.release();
-
-    return rows;
+    return data;
   });
 
   // Create a new Person
   server.post('/new', async (req, reply) => {
-    const { first_name, last_name } = req.body;
+    const data = await createNewUser(server, req.body);
 
-    return server.pg.transact(async (client) => {
-      const queryText =
-        'INSERT INTO account(first_name, last_name) VALUES($1, $2) RETURNING id';
-      const values = [first_name, last_name];
-
-      const person = await client.query(queryText, values);
-
-      return person;
-    });
+    return data;
   });
 
   next();
