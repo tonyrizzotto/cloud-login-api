@@ -1,0 +1,20 @@
+{
+  "name": "login-api",
+  "version": "1.0.0",
+  "description": "A login service that connects to Cloud Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./server"
+  },
+  "author": "Tony Rizzotto",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "fastify": "^3.27.2",
+    "fastify-postgres": "^3.6.0",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
