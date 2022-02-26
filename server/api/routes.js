@@ -1,4 +1,4 @@
-module.exports = function (server, opts, next) {
+module.exports = async function (server, opts, next) {
   // Get all people
   server.get('/', async (req, reply) => {
     const client = await server.pg.connect();
