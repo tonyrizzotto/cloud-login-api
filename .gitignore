@@ -1,3 +1,5 @@
+# Don't include node_modules folder
 node_modules
 
+# Don't include secrets file
 .env
