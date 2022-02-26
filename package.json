@@ -4,6 +4,7 @@
   "description": "A login service that connects to Cloud Portfolio",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "author": "Tony Rizzotto",
