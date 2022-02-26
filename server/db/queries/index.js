@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 ///////////////////////////////////
 //Helper Functions for DB Queries//
 ///////////////////////////////////
@@ -31,8 +33,8 @@ async function createNewUser(server, payload) {
 
   return server.pg.transact(async (client) => {
     const queryText =
-      'INSERT INTO account(first_name, last_name) VALUES($1, $2) RETURNING id';
-    const values = [first_name, last_name];
+      'INSERT INTO account(id, first_name, last_name) VALUES($1, $2, $3) RETURNING id';
+    const values = [uuidv4(), first_name, last_name];
 
     const person = await client.query(queryText, values);
 
